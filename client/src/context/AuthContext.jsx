@@ -1,4 +1,4 @@
-import { createContext, useState, useContext } from "react";
+import { createContext, useState, useContext, useEffect } from "react";
 import { registerRequest, loginRequest } from '../api/auth'
 
 export const AuthContext = createContext()
@@ -11,16 +11,6 @@ export const useAuth = () => {
     return context;
 }
 
-export const signIn = async (user) => {
-    try {
-        const res = await loginRequest(user)
-        console.log(res);
-    } catch (error) {
-        console.error(error.response.data)
-        setErrors(error.response.data)
-    }
-}
-
 export const AuthProvider = ({ children }) => {
     const [user, setUser] = useState(null)
     const [isAuthenticated, setIsAuthenticated] = useState(false)
@@ -30,13 +20,35 @@ export const AuthProvider = ({ children }) => {
         try {
             const res = await registerRequest(user);
             console.log(res);
-            setUser(res.data)
-            setIsAuthenticated(true)
+            if (res.status === 200) {
+                setUser(res.data);
+                setIsAuthenticated(true);
+            }
         } catch (error) {
-            console.log(error.response);
-            setErrors(error.response.data)
+            console.log(error.response.data);
+            setErrors(error.response.data.error)
         }
     }
+
+    const signIn = async (user) => {
+        try {
+            const res = await loginRequest(user)
+            console.log(res);
+            setIsAuthenticated(true)
+        } catch (error) {
+            console.error(error.response.data)
+            setErrors(error.response.data.error)
+        }
+    }
+
+    useEffect(() => {
+        if (errors.length > 0) {
+            const timer = setTimeout(() => {
+                setErrors([])
+            }, 6000)
+            return () => clearTimeout(timer)
+        }
+    }, [errors])
 
     return (
         <AuthContext.Provider value={{ signUp, signIn, user, isAuthenticated, errors }}>

@@ -8,7 +8,7 @@ export const register = async (req, res) => {
 
         const foundUser = await User.findOne({ email })
 
-        if (foundUser) return res.status(400).json(["The email already exists"])
+        if (foundUser) return res.status(400).json({ message: ["The email already exists"] })
 
         const encryptedPass = await bcrypt.hash(password, 10)
 
@@ -34,16 +34,15 @@ export const register = async (req, res) => {
 }
 
 export const login = async (req, res) => {
-    const { email, password } = req.body;
     try {
-
+        const { email, password } = req.body;
         const foundUser = await User.findOne({ email })
 
-        if (!foundUser) return res.status(400).json({ message: "User not found" })
+        if (!foundUser) return res.status(400).json({ message: ["Email not found"] })
 
         const isMatch = await bcrypt.compare(password, foundUser.password);
 
-        if (!isMatch) return res.status(400).json({ message: "Incorrect password" })
+        if (!isMatch) return res.status(400).json({ message: ["Incorrect password"] })
 
         const token = await createAccessToken({ id: foundUser._id });
         res.cookie('token', token)
@@ -51,12 +50,10 @@ export const login = async (req, res) => {
             id: foundUser._id,
             username: foundUser.username,
             email: foundUser.email,
-            createdAt: foundUser.createdAt,
-            updatedAt: foundUser.updatedAt
         })
     } catch (error) {
         console.log(error);
-        res.status(500).json({ message: error.message })
+        return res.status(500).json({ message: error.message })
     }
 }
 
