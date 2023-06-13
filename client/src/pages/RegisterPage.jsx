@@ -1,7 +1,7 @@
 import React, { useEffect } from 'react'
 import { useForm } from 'react-hook-form'
 import { useAuth } from '../context/AuthContext';
-import { useNavigate } from 'react-router-dom'
+import { useNavigate, Link } from 'react-router-dom'
 
 function RegisterPage() {
     const { register, handleSubmit, formState: {
@@ -44,7 +44,7 @@ function RegisterPage() {
                         <button className='bg-slate-300 p-2 w-36 rounded-md hover:bg-blue-500 hover:text-white transition-colors duration-300' tyoe='submit'>Login</button>
                     </div>
                 </form>
-                <p className='text-end text-gray-500 my-2'>Already have an account? <a href="/login" className='underline text-blue-800 hover:text-blue-500'>Log in</a></p>
+                <p className='text-end text-gray-500 my-2'>Already have an account? <Link to="/login" className='underline text-blue-800 hover:text-blue-500'>Log in</Link></p>
             </div>
         </div>
 

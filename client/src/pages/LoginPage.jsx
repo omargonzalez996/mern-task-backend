@@ -1,6 +1,7 @@
 import React from 'react'
 import { useForm } from 'react-hook-form'
 import { useAuth } from '../context/AuthContext'
+import { useNavigate, Link } from 'react-router-dom'
 
 function LoginPage() {
     const StyleInput = 'w-full text-black px-4 py-2 bg-zinc-100 rounded-sm my-2 text-center'
@@ -33,7 +34,7 @@ function LoginPage() {
                         <button className='bg-slate-300 p-2 w-36 rounded-md hover:bg-blue-500 hover:text-white transition-colors duration-300' tyoe='submit'>Register</button>
                     </div>
                 </form >
-                <p className='text-end text-gray-500'>Don't have an account? <a href="/register" className='underline text-blue-800 hover:text-blue-500'>Sign up</a></p>
+                <p className='text-end text-gray-500'>Don't have an account? <Link to="/register" className='underline text-blue-800 hover:text-blue-500'>Sign up</Link></p>
             </div>
         </div>
     )
