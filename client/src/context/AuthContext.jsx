@@ -17,16 +17,6 @@ export const AuthProvider = ({ children }) => {
     const [isAuthenticated, setIsAuthenticated] = useState(false)
     const [errors, setErrors] = useState([])
 
-    // clear errors after 5 seconds
-    useEffect(() => {
-        if (errors.length > 0) {
-            const timer = setTimeout(() => {
-                setErrors([]);
-            }, 5000);
-            return () => clearTimeout(timer);
-        }
-    }, [errors]);
-
     const signUp = async (user) => {
         try {
             const res = await registerRequest(user);
@@ -45,17 +35,27 @@ export const AuthProvider = ({ children }) => {
         try {
             const res = await loginRequest(user)
             console.log(res.data);
-            setUser(res.data)
             setIsAuthenticated(true)
+            setUser(res.data)
         } catch (error) {
             console.log(error);
             setErrors(error.response.data.error)
         }
     }
 
+    // clear errors after 5 seconds
+    useEffect(() => {
+        if (errors.length > 0) {
+            const timer = setTimeout(() => {
+                setErrors([]);
+            }, 5000);
+            return () => clearTimeout(timer);
+        }
+    }, [errors]);
+
     useEffect(() => {
         const cookies = Cookies.get()
-        console.log(cookies);
+        console.log('cookies: ',cookies.token);
         if (cookies.token) {
             console.log(cookies.token);
         }
