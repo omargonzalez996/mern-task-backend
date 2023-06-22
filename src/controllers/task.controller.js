@@ -39,5 +39,3 @@ export const deleteTasks = async (req, res) => {
     return res.sendStatus(204)
 }
 
-//min 1:30:50
-const link = "https://www.youtube.com/watch?v=NmkY4JgS21A"
