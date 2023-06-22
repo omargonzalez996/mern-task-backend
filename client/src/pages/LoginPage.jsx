@@ -31,7 +31,7 @@ function LoginPage() {
                         errors.password && (<p className='text-red-500'>Password is required</p>)
                     }
                     <div className='flex w-full justify-center p-5'>
-                        <button className='bg-slate-300 p-2 w-36 rounded-md hover:bg-blue-500 hover:text-white transition-colors duration-300' tyoe='submit'>Register</button>
+                        <button className='bg-slate-300 p-2 w-36 rounded-md hover:bg-blue-500 hover:text-white transition-colors duration-300' tyoe='submit'>Log In</button>
                     </div>
                 </form >
                 <p className='text-end text-gray-500'>Don't have an account? <Link to="/register" className='underline text-blue-800 hover:text-blue-500'>Sign up</Link></p>

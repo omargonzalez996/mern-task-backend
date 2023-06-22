@@ -41,7 +41,7 @@ function RegisterPage() {
                         errors.password && (<p className='text-red-500'>Password is required</p>)
                     }
                     <div className='flex w-full justify-center p-5'>
-                        <button className='bg-slate-300 p-2 w-36 rounded-md hover:bg-blue-500 hover:text-white transition-colors duration-300' tyoe='submit'>Login</button>
+                        <button className='bg-slate-300 p-2 w-36 rounded-md hover:bg-blue-500 hover:text-white transition-colors duration-300' tyoe='submit'>Register</button>
                     </div>
                 </form>
                 <p className='text-end text-gray-500 my-2'>Already have an account? <Link to="/login" className='underline text-blue-800 hover:text-blue-500'>Log in</Link></p>

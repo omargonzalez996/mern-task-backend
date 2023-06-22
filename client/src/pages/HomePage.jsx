@@ -43,7 +43,7 @@ function HomePage() {
                         <a data-tooltip-id="tultip" data-tooltip-content="Vite" href="https://vitejs.dev/">
                             <Icon icon="logos:vitejs" width="80" height="80" />
                         </a>
-                        <a data-tooltip-id="tultip" data-tooltip-content="HTML5" href="#" tooltip>
+                        <a data-tooltip-id="tultip" data-tooltip-content="HTML5" href="#" >
                             <Icon icon="vscode-icons:file-type-html" width="80" height="80" />
                         </a>
                         <a data-tooltip-id="tultip" data-tooltip-content="React" href="https://es.react.dev/">
