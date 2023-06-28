@@ -23,7 +23,7 @@ function LoginPage() {
 
     return (
         <div className='w-full h-screen flex justify-center items-center'>
-            <div className='bg-white max-w-md p-10 rounded-sm'>
+            <div className='bg-white max-w-md p-10 rounded-md'>
                 <a href="/" className='hover:underline hover:text-blue-500 transition duration-300'>{`< Back`}</a>
                 <h1 className='text-xl text-blue-500 text-center font-bold my-5'>Login</h1>
                 {signinErrors?.map((error, i) => (

@@ -1,44 +1,36 @@
-import { useForm } from 'react-hook-form'
-import { useNavigate } from 'react-router-dom'
+import { useEffect } from "react";
+import { useAuth } from "../context/AuthContext"
+import { useTasks } from "../context/TaskContext"
 
 function TasksPage() {
-    const { register, setValue, handleSubmit } = useForm()
-    const navigate = useNavigate()
+    const { getTasks, tasks } = useTasks();
 
-    const onSubmit = handleSubmit((data) => {
-        console.log(data);
-    })
+    useEffect(() => {
+        getTasks()
+    }, [])
+
+    if (tasks.length === 0) {
+        return (
+            <div className="flex items-center justify-center w-screen h-screen">
+                <h1>No Tasks Found...</h1>
+            </div>
+        )
+    }
+
 
     return (
-        <div className='w-screen h-screen flex items-center justify-center'>
-            <div
-                className='bg-white border-2 max-w-md w-full p-10 rounded-md'
-            >
-                <form onSubmit={onSubmit}>
-                    <input
-                        type="text"
-                        placeholder="Title"
-                        {...register('title')}
-                        className='w-full bg-zinc-50 text-gray-800 px-4 py-2 rounded-md border-2'
-                        autoFocus
-                    />
-                    <textarea
-                        rows="3"
-                        placeholder="Description"
-                        {...register("description")}
-                        className='w-full bg-zinc-50 text-gray-800 px-4 py-2 rounded-md border-2 my-2 resize-none'
-                    ></textarea>
-                    <button
-                        className='p-2 bg-blue-800 hover:bg-blue-500 text-white transition-all rounded-md w-36'
-                    >
-                        Save
-                    </button>
-                </form>
+        <div className="flex items-center justify-center w-screen h-screen">
+            <div className="grid gap-4 lg:grid-cols-3 md:grid-cols-2 sm:grid-cols-1 ">
+                {tasks.map(task => (
+                    <div key={task._id} className=" bg-slate-50 px-3 py-5 rounded-md max-w-xl">
+                        <div className="font-semibold text-xl text-slate-600">{task.title}</div>
+                        <div className="text-slate-500">{task.description}</div>
+                    </div>
+                ))}
             </div>
         </div>
     )
 }
 
-export default TasksPage
 
-const link = "https://www.youtube.com/watch?v=NmkY4JgS21A" //3h:35m
+export default TasksPage
