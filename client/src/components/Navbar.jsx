@@ -7,7 +7,7 @@ export function Navbar() {
   console.log(isAuthenticated, user)
 
   return (
-    <nav className="bg-slate-50 w-screen flex justify-between py-5 px-10 shadow-2xl">
+    <nav className="bg-slate-50 w-screen flex justify-between py-5 px-10 shadow-2xl fixed">
       <h1 className="text-2xl font-bold">
         <Link to={isAuthenticated ? "/tasks" : "/"}>TaskApp</Link>
       </h1>
@@ -18,7 +18,7 @@ export function Navbar() {
               Welcome {user.username}
             </li>
             <li>
-              <ButtonLink to="/add-task">Add Task</ButtonLink>
+              <ButtonLink to="/tasks/new">Add Task</ButtonLink>
             </li>
             <li>
               <Link to="/" onClick={() => logout()}>
